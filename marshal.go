@@ -1,13 +1,13 @@
 package main
 
-import(
+import (
 	"time"
 )
 
 type LinkType struct {
-	URL string
-	Title string
-	Tag string
+	URL        string
+	Title      string
+	Tag        string
 	CreateTime time.Time
 }
 
@@ -16,9 +16,9 @@ type LinksType struct {
 }
 
 type CreateRequest struct {
-	URL string
-	Title string
-	Tag string
+	URL        string
+	Title      string
+	Tag        string
 	CreateTime time.Time
 }
 
@@ -32,7 +32,7 @@ type FetchLinkRequest struct {
 
 type FetchLinkResponse struct {
 	Message bool
-	Link LinkType
+	Links   []LinkType
 }
 
 type FetchTagRequest struct {
@@ -41,6 +41,6 @@ type FetchTagRequest struct {
 
 type FetchTagResponse struct {
 	Message bool
-	Size int
-	Links []LinkType
+	Size    int
+	Links   []LinkType
 }

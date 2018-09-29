@@ -1,15 +1,17 @@
 package main
 
 import (
-	"io/ioutil"
-	"fmt"
-	"os"
 	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+
+	"github.com/lithammer/fuzzysearch/fuzzy"
 )
 
 func GetLinksSearch(SearchTerm string) []LinkType {
-	
-	Results := make([]LinkType, 10)
+
+	var Results []LinkType
 
 	jsonFile, err := os.Open("data.json")
 	if err != nil {
@@ -26,19 +28,24 @@ func GetLinksSearch(SearchTerm string) []LinkType {
 	json.Unmarshal(byteValue, &links)
 
 	for i := 0; i < len(links.Links); i++ {
-		fmt.Println("Link URL: " + links.Links[i].URL)
-		fmt.Println("Link Title: " + links.Links[i].Title)
-		fmt.Println("Link Tag: " + links.Links[i].Tag)
-		fmt.Println("Link CreateTime: " + links.Links[i].CreateTime.String())
+		// fmt.Println("Link Title: " + links.Links[i].Title)
 
 		// Search Algorithim
+
+		if fuzzy.Match(SearchTerm, links.Links[i].Title) ||
+			fuzzy.Match(SearchTerm, links.Links[i].Tag) ||
+			fuzzy.Match(SearchTerm, links.Links[i].URL) {
+			Results = append(Results, links.Links[i])
+			fmt.Println("Link Title: " + links.Links[i].Title)
+		}
+
 	}
 
 	return Results
 }
 
 func GetLinksTag(SearchTerm string) []LinkType {
-	
+
 	var Results []LinkType
 
 	jsonFile, err := os.Open("data.json")
