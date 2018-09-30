@@ -1,6 +1,1 @@
-{
-    "Links": [
-        {"URL":"http://google.com/","Title":"Google Web Search","Tag":"Search","CreateTime":"2018-09-29T16:09:17.3590951+05:30"},
-        {"URL":"http://yahoo.com/","Title":"Yahoo Web Search","Tag":"Search","CreateTime":"2018-09-29T16:09:17.3590951+05:30"}
-    ]
-}
+{"Links":[{"URL":"http://google.com/","Title":"Google Web Search","Tag":"Search","CreateTime":"2018-09-29T16:09:17.3590951+05:30"},{"URL":"http://google.com/","Title":"Google Web Search","Tag":"Search","CreateTime":"2018-09-29T16:09:17.3590951+05:30"}]}

@@ -36,7 +36,7 @@ func GetLinksSearch(SearchTerm string) []LinkType {
 			fuzzy.Match(SearchTerm, links.Links[i].Tag) ||
 			fuzzy.Match(SearchTerm, links.Links[i].URL) {
 			Results = append(Results, links.Links[i])
-			fmt.Println("Link Title: " + links.Links[i].Title)
+			// fmt.Println("Link Title: " + links.Links[i].Title)
 		}
 
 	}
@@ -80,16 +80,37 @@ func GetLinksTag(SearchTerm string) []LinkType {
 }
 
 func StoreLink(link LinkType) {
-	jsonFile, err := os.Open("data.json")
+	jsonFile, err := os.OpenFile("data.json", os.O_RDWR, os.ModeAppend)
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	fmt.Println("Successfully Opened data.json")
-	defer jsonFile.Close()
 	byteValue, _ := ioutil.ReadAll(jsonFile)
-
 	var links LinksType
 
 	json.Unmarshal(byteValue, &links)
+
+	links.Links = append(links.Links, link)
+
+	stream, err := json.Marshal(links)
+
+	fmt.Println(string(stream))
+
+	jsonFile.Close()
+
+	err1 := os.Truncate("data.json", 0)
+	if err1 != nil {
+		fmt.Println(err1)
+	}
+
+	fmt.Println("Successfully Opened data.json")
+	dataFile, err := os.OpenFile("data.json", os.O_RDWR, os.ModeAppend)
+	byteStream, err := dataFile.WriteString(string(stream))
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("wrote %d bytes\n", byteStream)
+	dataFile.Close()
+
 }

@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-	GetLinksSearch("dhc")
+	// GetLinksSearch("dhc")
 	port := ":8080"
 	mux := http.DefaultServeMux
 
@@ -34,9 +34,9 @@ func CreateHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err1)
 	}
 
-	fmt.Println(rqst.URL)
-	fmt.Println(rqst.Tag)
-	fmt.Println(rqst.CreateTime)
+	// fmt.Println(rqst.URL)
+	// fmt.Println(rqst.Tag)
+	// fmt.Println(rqst.CreateTime)
 
 	link := LinkType{
 		URL:        rqst.URL,
